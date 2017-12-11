@@ -1,0 +1,18 @@
+<QDSStatusRequest xmlns="http://underwriting.qdsonline.com/statusReq" xmlns:client="http://underwriting.qdsonline.com/client" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://underwriting.qdsonline.com/statusReq" version="1.0">
+  <header>
+    <transactionId>12345678</transactionId>
+    <requestDate>2007-01-25T14:35:17.676-05:00</requestDate>
+    <requestingCompany>
+	<cli:companyName xmlns:cli="http://underwriting.qdsonline.com/client">${client.companyName}</cli:companyName>
+	<cli:companyIdentifier xmlns:cli="http://underwriting.qdsonline.com/client">${client.companyIdentifier}</cli:companyIdentifier>
+	<cli:dealIdentifier1 xmlns:cli="http://underwriting.qdsonline.com/client">${Deal}</cli:dealIdentifier1>
+	<cli:password xmlns:cli="http://underwriting.qdsonline.com/client">${client.password}</cli:password>
+    </requestingCompany>
+
+  </header>
+  <body>
+   <policyId>${policyNumber}</policyId>
+  </body>
+</QDSStatusRequest>
+
+

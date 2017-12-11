@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><test-case xmlns="http://qds.com/schema/test-case" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" defect="PLACEHOLDER" name="QACL_1-1_TST_001_TC.xml" onError="CONTINUE" xsi:schemaLocation="http://qds.com/schema/test-case test-case.xsd">
+
+<description>V4 MVR Mapping Mechanics - Base Case - Test Case to ensure correct risk factor(s), adjustment(s), and qualifiers are being applied for a given AVD code.   Risk factor(s), Adjustment(s), and Qualifiers should be validated through the TC and in the DB. 
+	Input:
+	MVR Product_id: TEST_PDT_MVR_A
+	Date of Birth: 5-31-1973
+	Signature Date: 5-30-2009
+	AVD Code: TSTA
+	Violation Date: 5-31-2008
+
+	Output:
+	Risk Factor(s): MVR-Violations
+	Adjustment(s): Violation, Medical
+	Occurrence Qualifier: Low - 11, High - 11
+	Age at Occurrence Qualifier: Low - 35, High - 35
+	Value Qualifier: Low - 9, High - 9
+</description>
+
+<application action="DELETE" externalId="QACL_1-1_TST_001" onError="CONTINUE"/>
+    <tasks>
+
+        <groovy file="scripts/Utils.groovy" onError="CONTINUE"/>
+        <groovy file="scripts/QA_Client_A.groovy" onError="CONTINUE"/>
+        <groovy>util = new Util()</groovy>
+        <groovy>client = new Client()</groovy>
+ 
+        <groovy>policyNumber = 'QACL_1-1_TST_001'</groovy>
+        <groovy>FName='FirstName'</groovy>
+		<groovy>MName='MiddleName'</groovy>
+        <groovy>LName='LastName'</groovy> 
+		<groovy>license='M08277227308875'</groovy>
+
+	<!-- *** Mock data Applicant Client ID declerations *** -->
+        <groovy>AppID = 'MVR_V4_Person1'</groovy>
+		<groovy>ADR_ORDER_MOCKDATA = 'MVR_V4_Person1'</groovy>
+		<groovy>MIB_MOCKDATA = 'GenericPerson'</groovy>
+		<groovy>INGENIX_MOCKDATA = 'GenericPerson'</groovy>
+	<!-- *** Mock data Applicant Client ID declerations END *** -->
+
+        <groovy>Sex='MALE'</groovy>
+        <groovy>height= '64' </groovy>
+        <groovy>weight= '125' </groovy>
+        <groovy>dob = '1973-05-31'</groovy>
+        <groovy>Deal = 'QA_MVR_A'</groovy>
+        <groovy>CovPlan = 'FST10'</groovy>
+        <groovy>Treaty = 'FNWL_01'</groovy>
+        <groovy>BenType = 'BASE'</groovy>
+		<groovy>AppSignDate = '2009-05-30' </groovy>
+        <groovy>AuthSignDate = '2009-05-30' </groovy>
+        <groovy>SmokerClass = 'NS'</groovy>
+        <groovy>RiskClass = 'PF'</groovy>
+        <groovy>IssueState = 'IL'</groovy>
+        <groovy>licenseState = 'IL'</groovy>
+        <groovy>citizenship = 'US'</groovy>
+        <groovy>BenefitAmount = '100000'</groovy>
+        <groovy>ssn = '720101001'</groovy>
+
+        <new request="QACL_1-1_TST_000_UW.xml" result="SUCCESS"/>
+        <!-- Status and additional validations (scoring, reason codes, etc) -->
+        <status delay="30" onError="CONTINUE" request="Fetch_Status.xml" retry="30">
+
+		<validation validation-type="mvr-mapping-audit">
+		
+			<mvr-code>TSTA</mvr-code>
+			<violation-date>2008-05-31</violation-date>
+			
+			<risk-factor-audit>
+				<risk-factor>MVR-Violations</risk-factor>
+			<risk-factor-Adj-rows><risk-factor-adjustment name="adj1"/><risk-factor-adjustment name="adj2"/></risk-factor-Adj-rows></risk-factor-audit>
+			
+			<adjustment-audit name="adj1">
+				<adjustment>Violation</adjustment>
+			</adjustment-audit>
+
+			<adjustment-audit name="adj2">
+				<adjustment>Medical</adjustment>
+			</adjustment-audit>
+			
+			<data-qualifier-audit name="dq1">
+				<occurence-low>11</occurence-low>
+				<occurence-high>11</occurence-high>
+				<occurence-age-low>35</occurence-age-low>
+				<occurence-age-high>35</occurence-age-high>
+				<value-low>9</value-low>
+				<value-high>9</value-high>
+			</data-qualifier-audit>
+			
+			<dq-adj-xref>
+				<adj>adj2</adj>
+				<dq>dq1</dq>
+			</dq-adj-xref>
+			
+			<dq-adj-xref>
+				<adj>adj1</adj>
+				<dq>dq1</dq>
+			</dq-adj-xref>
+
+		</validation>
+		
+	</status> 
+    </tasks>
+
+</test-case>

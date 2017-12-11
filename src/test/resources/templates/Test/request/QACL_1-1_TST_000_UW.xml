@@ -1,0 +1,129 @@
+<QDSUnderwritingRequest xmlns="http://underwriting.qdsonline.com/request" version="1.0">
+  <header>
+    <transactionId>12345678</transactionId>
+    <requestDate>2007-01-25T14:35:17.676-05:00</requestDate>
+       <requestingCompany encrypt="false">
+             <cli:companyName xmlns:cli="http://underwriting.qdsonline.com/client">${client.companyName}</cli:companyName> 
+             <cli:companyIdentifier xmlns:cli="http://underwriting.qdsonline.com/client">${client.companyIdentifier}</cli:companyIdentifier> 
+             <cli:dealIdentifier1 xmlns:cli="http://underwriting.qdsonline.com/client">${Deal}</cli:dealIdentifier1> 
+             <cli:password xmlns:cli="http://underwriting.qdsonline.com/client">${client.password}</cli:password> 
+         </requestingCompany>
+  </header>
+  <body>
+    <application policyNumber="${policyNumber}">
+      <acceptDate>${util.xmlDate(new Date() - 5 ) }</acceptDate>
+      <applicant type="PRIMARY" identifier="${AppID}">
+        <person idref="Person01" />
+        <gender>${Sex}</gender>
+        <birthDate>${dob}</birthDate>
+        <birthState>GA</birthState>
+        <citizenship>${citizenship}</citizenship>
+        <homePhone>570-965-4725</homePhone>
+        <workPhone>793-825-7816</workPhone>
+        <height uom="inches">${height}</height>
+        <weight uom="lbs">${weight}</weight>
+        <occupation>
+          <name>SECRETARY</name>
+          <description>SECRETARY</description>
+        </occupation>
+        <annualIncome>128000</annualIncome>
+        <driversLicense type="ACTIVE">
+          <number>${license}</number>   
+          <state>${licenseState}</state>
+        </driversLicense>
+        <benefit>
+          <effectiveDate>${util.xmlDate(new Date() - 5 ) }</effectiveDate>
+          <coverage plan="${CovPlan}" treaty="${Treaty}" identifier="${AppID}" benefitType="${BenType}">
+            <amount>${BenefitAmount}</amount>
+            <duration>10</duration>
+            <conditionalReceiptAmount>50000</conditionalReceiptAmount>
+            <isReplacementInsurance>false</isReplacementInsurance>
+            <smokerClass>${SmokerClass}</smokerClass>
+            <riskClass>${RiskClass}</riskClass>
+          </coverage>
+        </benefit>
+        <signedMedicalAuthForm>true</signedMedicalAuthForm>
+        <authSignedDate>${AuthSignDate}</authSignedDate>
+        <applicantSignature>
+          <date>${AppSignDate}</date>
+          <city>Charlotte</city>
+          <state>GA</state>
+        </applicantSignature>
+         <questionnaireResponse questionnaireNumber="TST" state="NC">
+          <questionResponse questionNumber="TST01">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST02">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST03">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST04">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST05">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST06">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST07">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST08">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST09">
+            <answer>No</answer>
+          </questionResponse>
+          <questionResponse questionNumber="TST10">
+            <answer>No</answer>
+          </questionResponse>
+         </questionnaireResponse>
+	<applicantProperties>
+		<name>MIB_MOCKDATA</name>
+		<value>${MIB_MOCKDATA}</value>  
+	</applicantProperties>
+	<applicantProperties>
+		<name>INGENIX_MOCKDATA</name>
+		<value>${INGENIX_MOCKDATA}</value>  
+	</applicantProperties> 
+	<applicantProperties>
+		<name>ADR_ORDER_MOCKDATA</name>
+		<value>${ADR_ORDER_MOCKDATA}</value>  
+	</applicantProperties> 			
+      </applicant>
+      <agent identifier="Agent01">
+        <name>
+          <prefix />
+          <firstName>Bert</firstName>
+          <middleName>K</middleName>
+          <lastName>Lancaster</lastName>
+          <suffix />
+        </name>
+        <agentNumber>AG089B678</agentNumber>
+        <agentLicense>L02356</agentLicense>
+        <percentCommission>100</percentCommission>
+        <agentSignatureDate>${ util.shortDate(new Date() - 1) }</agentSignatureDate>
+      </agent>
+      <stateOfIssue>${ IssueState }</stateOfIssue>
+      <individual identifier="${AppID}" id="Person01">
+        <name>
+          <firstName>${FName}</firstName>
+          <middleName>${MName}</middleName>
+          <lastName>${LName}</lastName>
+        </name>
+        <address>
+          <addressLine1>401 North Tryon</addressLine1>
+          <addressLine2>Suite 800</addressLine2>
+          <city>Charlotte</city>
+          <state>GA</state>
+          <postalCode>28202</postalCode>
+          <country>US</country>
+        </address>
+        <SSN>${ ssn }</SSN>
+      </individual>
+      </application>
+  </body>
+</QDSUnderwritingRequest>
